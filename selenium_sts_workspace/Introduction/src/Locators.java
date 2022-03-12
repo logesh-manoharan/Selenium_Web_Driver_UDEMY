@@ -6,16 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Locators {
-	public static void main(String[] args) {
-		
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\lmanoh572\\Documents\\Selenium_Web_Driver_UDEMY\\chromedriver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		
-		// Waiting for 5 seconds when we encountered a NoSuchElement exception
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		
-		driver.get("https://rahulshettyacademy.com/locatorspractice/");
-		
+	
+	public static void login(WebDriver driver, String username, String password) {
 		/*
 		 *  ID Locator
 		 */
@@ -26,8 +18,8 @@ public class Locators {
 		 */
 		WebElement passwordElement = driver.findElement(By.name("inputPassword"));
 		
-		usernameElement.sendKeys("rahul");
-		passwordElement.sendKeys("rahulshettyacademy!!");
+		usernameElement.sendKeys(username);
+		passwordElement.sendKeys(password);
 		
 		
 		WebElement rememberUsrChkbox = driver.findElement(By.id("chkboxOne"));
@@ -41,7 +33,7 @@ public class Locators {
 		rememberUsrChkbox.click();
 		agreeChkbox.click();
 		signinBtnElement.click();
-
+		
 		/*
 		 *  CSS Selector Locator
 		 */
@@ -61,17 +53,42 @@ public class Locators {
 			/* 
 			 * Xpath Locator
 			 */
-			WebElement nameElement = driver.findElement(By.xpath("//input[@placeholder=\"Name\"]"));
-			nameElement.sendKeys("Logesh");
+//			WebElement nameElement = driver.findElement(By.xpath("//input[@placeholder=\"Name\"]"));
+//			nameElement.sendKeys("Logesh");
+			
+			forgotPassword(driver, "Mano", "mano190@gmail.com", "9090909090");
 			
 			return;
 		}
-		
 		WebElement logoutElement = driver.findElement(By.className("logout-btn"));
 		if (logoutElement.isDisplayed()) {
 			System.out.println("Logged in Successfully !!");
 			driver.close();
 			return;
 		}
+	}
+	
+	public static void forgotPassword(WebDriver driver, String newName, String newMail, String newPhoneNo) {
+		driver.findElement(By.xpath("//div[@class=\"forgot-pwd-container\"]/a[1]")).click();
+		driver.findElement(By.cssSelector("input[placeholder=\"Name\"]")).sendKeys(newName);
+		driver.findElement(By.cssSelector("input[placeholder=\"Email\"]")).sendKeys(newMail);
+		driver.findElement(By.xpath("//input[@placeholder=\"Phone Number\"]")).sendKeys(newPhoneNo);
+		
+		driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
+		
+		driver.findElement(By.xpath("//div[@class=\"forgot-pwd-btn-conainer\"]/button[1]")).click();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\lmanoh572\\Documents\\Selenium_Web_Driver_UDEMY\\chromedriver\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		
+		// Waiting for 5 seconds when we encountered a NoSuchElement exception
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		
+		driver.get("https://rahulshettyacademy.com/locatorspractice/");
+		
+		login(driver, "rahul", "rahulshettyacademy!!");
 	}
 }
