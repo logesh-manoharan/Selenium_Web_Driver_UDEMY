@@ -74,7 +74,17 @@ public class Locators {
 		driver.findElement(By.cssSelector("input[placeholder=\"Email\"]")).sendKeys(newMail);
 		driver.findElement(By.xpath("//input[@placeholder=\"Phone Number\"]")).sendKeys(newPhoneNo);
 		
-		driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
+		/*
+		 * Sibling Traversal
+		 */
+		driver.findElement(By.xpath("//button[@class='go-to-login-btn']/following-sibling::button[1]")).click();
+		
+		/*
+		 * Child to Parent Traversal
+		 */
+		// driver.findElement(By.xpath("//button[@class='go-to-login-btn']/parent::div/button[2]")).click();
+		
+//		driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
 		
 		driver.findElement(By.xpath("//div[@class=\"forgot-pwd-btn-conainer\"]/button[1]")).click();
 	}
