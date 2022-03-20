@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DynamicDropdown {
 
-	public static void main(String[] args) {
+	public static WebDriver main(String[] args) {
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\lmanoh572\\Documents\\Selenium_Web_Driver_UDEMY\\chromedriver\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
@@ -37,6 +37,8 @@ public class DynamicDropdown {
 		driver.findElement(By.xpath("//div[@id='glsctl00_mainContent_ddl_destinationStation1_CTNR'] //a[@value='MAA']")).click();
 		System.out.println("TO : " + driver.findElement(By.xpath("//input[@id='ctl00_mainContent_ddl_destinationStation1_CTXT']")).getAttribute("value"));
 		
+		
+		return driver;
 	}
 
 }
